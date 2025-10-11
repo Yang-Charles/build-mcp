@@ -1,0 +1,28 @@
+[project]
+name = "build-mcp"
+version = "0.1.0"
+description = "构建 MCP 服务器"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.17.0",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+    "pyyaml>=6.0.3",
+]
+
+[[index]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+trusted-host = "pypi.tuna.tsinghua.edu.cn"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[project.scripts]
+build_mcp = "build_mcp.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/build_mcp"]
