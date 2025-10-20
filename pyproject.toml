@@ -1,3 +1,8 @@
+#PEP 517/518 开始，Python 允许项目使用 pyproject.toml 来声明构建系统，而不依赖 setup.py。
+[build-system]
+requires = ["hatchling"]  # hatchling 是一个现代化、轻量级、快速的构建工具，由 Hatch 提供支持
+build-backend = "hatchling.build" # 指定使用哪个构建后端来执行构建任务。这里是 hatchling.build，也就是 hatchling 提供的构建接口
+
 [project]
 name = "build-mcp"
 version = "0.1.0"

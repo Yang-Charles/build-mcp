@@ -1,9 +1,10 @@
 # 高德地图API配置
-api_key: test
+api_key:
 # 高德地图API的基础URL
 base_url: https://restapi.amap.com
 # 代理设置
-proxy: http://127.0.0.1:10809
+proxy:
+#proxy: http://127.0.0.1:10809
 # 日志等级
 log_level: INFO
 # 接口重试次数
