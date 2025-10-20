@@ -74,6 +74,17 @@ log_dir: /var/log/build_mcp
 uv pip install -e .
 ```
 
+通过以下命令来运行 MCP 服务：
+
+启动stdio协议的MCP服务：
+```shell
+uv run build_mcp
+```
+启动streamable-http协议的MCP服务：
+```shell
+uv run build_mcp streamable-http
+```
+
 ### 2.使用Inspector进行测试
 Inspector是官方提供的一个MCP服务调试工具，可以通过它来启动一个本地web界面，在界面中可以直接调用MCP服务的工具。
 相对更加直观和易用，比较推荐这种方式，详情可以查看[官方文档](https://modelcontextprotocol.io/docs/tools/inspector)。
