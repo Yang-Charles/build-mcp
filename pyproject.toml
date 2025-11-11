@@ -1,0 +1,40 @@
+#PEP 517/518 开始，Python 允许项目使用 pyproject.toml 来声明构建系统，而不依赖 setup.py。
+[build-system]
+requires = ["hatchling"]  # hatchling 是一个现代化、轻量级、快速的构建工具，由 Hatch 提供支持
+build-backend = "hatchling.build" # 指定使用哪个构建后端来执行构建任务。这里是 hatchling.build，也就是 hatchling 提供的构建接口
+
+[project]
+name = "build-mcp"
+version = "0.1.0"
+description = "构建 MCP 服务器"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "dashscope>=1.25.0",
+    "httpx>=0.28.1",
+    "langchain>=1.0.5",
+    "langchain-community>=0.4.1",
+    "langchain-openai>=1.0.2",
+    "mcp[cli]>=1.17.0",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+    "pyyaml>=6.0.3",
+    "tenacity>=9.1.2",
+]
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]  # 显式告诉 pytest：只扫描 tests 目录，相当于执行 pytest tests/，加快收集速度，也避免误扫到别处。
+asyncio_mode = "auto"  # 省略这个标记 @pytest.mark.asyncio，pytest 会直接运行这个 async def 函数
+
+# “给命令起别名”：安装后让用户直接在终端敲名字就能跑你的代码，无需 python -m xxx
+# 用户在终端敲 build_mcp → 等价于 python -m build_mcp.__main__ → 最终执行 build_mcp/__main__.py 里的 main() 函数。
+[project.scripts]
+build_mcp = "build_mcp.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/build_mcp"] # 显式指定要打包的 Python 包目录, 运行 hatch build 或 pip wheel . 生成的 build-mcp-0.1.0-py3-none-any.whl 里只包含 src/build-mcp/*.py，不会把 tests/、无关目录打进去
