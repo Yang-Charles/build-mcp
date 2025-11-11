@@ -1,4 +1,4 @@
-## 如何从零开始构建一个高德地图的MCP服务，涵盖了以下内容：
+# 如何从零开始构建一个高德地图的MCP服务，涵盖了以下内容：
 
 ### MCP服务的基本概念和配置
 ### 如何使用高德地图API进行IP定位和周边搜索
@@ -8,7 +8,9 @@
 ### 如何使用Makefile管理项目命令
 ### 如何配置MCP客户端连接到我们的服务
 
-
+<a href="https://glama.ai/mcp/servers/@Yang-Charles/build-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@Yang-Charles/build-mcp/badge" alt="Amap (Gaode Maps) Server MCP server" />
+</a>
 
 ## 配置开发环境
 
