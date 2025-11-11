@@ -1,13 +1,15 @@
-from langchain_community.chat_models.tongyi import ChatTongyi
-from typing import List, Optional
-from langchain_core.messages import BaseMessage
+from langchain_openai import ChatOpenAI
+import os
+from dotenv import load_dotenv
+# 加载环境变量
+load_dotenv()
 
-class DashScopeChat(ChatTongyi):
-    def _generate(self, messages: List[BaseMessage], **kwargs):
-        # 只保留后端认识的两个值
-        tc = kwargs.get("tool_choice")
-        if tc is not None and not isinstance(tc, str):
-            kwargs["tool_choice"] = "auto"
-        return super()._generate(messages, **kwargs)
-
-# model = DashScopeChat(model="qwen-max", temperature=0)
+def qwen_model(model="qwen-max"):
+    model = ChatOpenAI(
+        api_key=os.getenv("DASHSCOPE_API_KEY"),  # 阿里云颁发的 key
+        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        model=model,  # qwen-plus / qwen-turbo 均可
+        temperature=0.5,
+        max_retries=2
+    )
+    return model
